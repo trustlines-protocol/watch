@@ -25,9 +25,21 @@ def get_blockNumber(url):
     return util.decode_hex_encoded_number(response)
 
 
+def get_peerCount(url):
+    response = json_rpc_call(url, "net_peerCount")
+    return util.decode_hex_encoded_number(response)
+
+
+def get_syncing(url):
+    response = json_rpc_call(url, "eth_syncing")
+    return response
+
+
 def watch_jsonrpc(url):
     try:
         blockNumber = get_blockNumber(url)
+        peerCount = get_peerCount(url)
+        syncing = get_syncing(url)
         return [
             {
                 "service": "jsonrpc.blocknumber",
@@ -35,11 +47,29 @@ def watch_jsonrpc(url):
                 "state": "ok",
                 "ttl": 30,
                 "metric": blockNumber,
-            }
+            },
+            {
+                "service": "jsonrpc.peercount",
+                "host": url,
+                "state": "ok",
+                "ttl": 30,
+                "metric": peerCount,
+            },
+            {
+                "service": "jsonrpc.syncing",
+                "host": url,
+                "state": "true" if syncing else "false",
+                "ttl": 30,
+            },
         ]
     except BaseException as e:
         logger.warning("error in watch_etherscan:%s", e)
-        return [{"service": "jsonrpc.blocknumber", "host": url, "state": "error"}]
+        return [
+            {"service": service, "host": url, "state": "error", "description": str(e)}
+            for service in [
+                "jsonrpc.blockNumber", "jsonrpc.peercount", "jsonrpc.syncing"
+            ]
+        ]
 
 
 @click.command()
