@@ -9,16 +9,16 @@ trustlines watch requires python 3.5 or up. Please run the following command in 
 
     pip install . -c constraints.txt
 
-This will install a 'tlwatch' executable.
+This will install a 'tl-watch' executable.
 
 ## Usage
 
-### tlwatch etherscan
+### tl-watch etherscan
 
-Watches etherscan for the current blockNumber. Run `tlwatch etherscan --help`
+Watches etherscan for the current blockNumber. Run `tl-watch etherscan --help`
 for available command line options.
 
-### tlwatch jsonrpc
+### tl-watch jsonrpc
 
-Watches a parity or geth client via the JSONRPC interface. Run `tlwatch jsonrpc
+Watches a parity or geth client via the JSONRPC interface. Run `tl-watch jsonrpc
 --help` for available command line options.
