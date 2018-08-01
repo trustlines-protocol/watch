@@ -1,0 +1,30 @@
+sudo: required
+services:
+- docker
+language: python
+python:
+- '3.6'
+git:
+  depth: false
+install:
+- pip install -c constraints.txt -r requirements.txt
+- pip install -c constraints.txt -e .
+script:
+- flake8
+- black --check setup.py tlwatch
+- mypy --ignore-missing-imports tlwatch
+- docker build -t watch .
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ".travis/push-docker-image"
+  on:
+    branch: develop
+branches:
+  only:
+  - master
+  - develop
+env:
+  global:
+  - DOCKER_USER=trustlinesautomation
+  - secure: NPWMWVOMdnVir3vKiLwbFqvsZ2p2I4f6Y4POKFsUbTxScsfiqRAnIjDpeUFQEYQ+2aeh99OLBlMHQkL4yZU0eFpRIG/zKDuQ8LOl6mRyQgrfOhjYvKN5+IPGLyjgtDtH0HDqid2ZZcNMCnKizLBAQFgNfdsnb81B9/5h6o7hx/tbV/nRUZ1KlsXLvRisy34ZAq4hQCIs66Y3rd3le6yES45F+BcXgkRJ0OxQlTwF3L/wNktzgwj/97AX8TjTpJhilgS1gQo5QEjg3ZNujNFstnasVvdCmmv9Oy566PDY3Zjj0HebXLnTbvLPsbdNeN3PpZGFA38sJSdFuqbtIlMeMCLVgStG+jEMDpuGjyyMLDTz1EgQFlJrmUXcGbGU7WvRs16egP6dqCCYmQCMihxd24nXZUOvLIoicrlWwUgt/Sy482TxDwyjDN0m9uxO5M1lblFCnlbiJqjpqD2YJDBLwsmCO/FwwlXQUEsbycqiHvbRMlP94dWUBZXUdxxh57XNEchYPQc5gcdr1bO5VuywtuhxO0D/ggvu1PHFsJUkNKiMHXuDCDNPQd/Rt3SUKWwZWvDOo8pQ/w9R6uguXdeb+st37fzkRQdmAGBjwG+hgv7EWyK77IbqU2k2em554KhkWAuwcuHl+sYzfoj1cO3uJCru5OmhUY3qTLXeyx0poqk=
