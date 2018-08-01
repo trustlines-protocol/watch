@@ -67,7 +67,9 @@ def watch_jsonrpc(url):
         return [
             {"service": service, "host": url, "state": "error", "description": str(e)}
             for service in [
-                "jsonrpc.blocknumber", "jsonrpc.peercount", "jsonrpc.syncing"
+                "jsonrpc.blocknumber",
+                "jsonrpc.peercount",
+                "jsonrpc.syncing",
             ]
         ]
 
