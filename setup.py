@@ -11,5 +11,6 @@ setup(
     entry_points="""
         [console_scripts]
         tlwatch=tlwatch.cli:cli
+        tl-watch=tlwatch.cli:cli
     """,
 )

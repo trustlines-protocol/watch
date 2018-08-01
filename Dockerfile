@@ -36,4 +36,5 @@ RUN rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/watch
 COPY --from=builder /opt/watch /opt/watch
 RUN ln -s /opt/watch/bin/tlwatch /usr/local/bin/
+RUN ln -s /opt/watch/bin/tl-watch /usr/local/bin/
 CMD ["/opt/watch/bin/tlwatch"]
