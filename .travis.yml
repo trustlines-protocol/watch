@@ -20,6 +20,7 @@ deploy:
   script: ".travis/push-docker-image"
   on:
     branch: develop
+    tags: true
 branches:
   only:
   - master
