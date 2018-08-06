@@ -7,35 +7,39 @@
 #
 #   docker build . -t watch
 
-FROM ubuntu:18.04 as ubuntu-python
+FROM ubuntu:18.04 as builder
 # python needs LANG
 ENV LANG C.UTF-8
 RUN apt-get -y update \
-    && apt-get dist-upgrade -y \
-    && apt-get install -y --no-install-recommends python3 python3-distutils
-
-FROM ubuntu-python as builder
-RUN apt-get install -y --no-install-recommends python3-dev python3-venv git build-essential
+    && apt-get install -y --no-install-recommends python3 python3-distutils \
+               python3-dev python3-venv git build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv /opt/watch
-WORKDIR /opt/watch
-RUN bin/pip install --disable-pip-version-check pip==18.0
+ENV PATH "/opt/watch/bin:${PATH}"
+WORKDIR /watch
+RUN pip install --disable-pip-version-check pip==18.0
 
-COPY ./constraints.txt /watch/constraints.txt
-COPY ./requirements.txt /watch/requirements.txt
+COPY ./constraints.txt constraints.txt
+COPY ./requirements.txt requirements.txt
 # remove development dependencies from the end of the file
-RUN sed -i -e '/development dependencies/q' /watch/requirements.txt
+RUN sed -i -e '/development dependencies/q' requirements.txt
 
-RUN bin/pip install --disable-pip-version-check -c /watch/constraints.txt -r /watch/requirements.txt
+RUN pip install --disable-pip-version-check -c constraints.txt -r requirements.txt
 
 COPY . /watch
-RUN bin/pip install --disable-pip-version-check -c /watch/constraints.txt /watch
-RUN bin/python -c 'import pkg_resources; print(pkg_resources.get_distribution("trustlines-watch").version)' >VERSION
+RUN pip install --disable-pip-version-check -c constraints.txt .
+RUN python -c 'import pkg_resources; print(pkg_resources.get_distribution("trustlines-watch").version)' >/opt/watch/VERSION
+
+
 # copy the contents of the virtualenv from the intermediate container
-FROM ubuntu-python
-RUN rm -rf /var/lib/apt/lists/*
+FROM ubuntu:18.04
+ENV LANG C.UTF-8
 COPY --from=builder /opt/watch /opt/watch
 WORKDIR /opt/watch
-RUN ln -s /opt/watch/bin/tlwatch /usr/local/bin/
-RUN ln -s /opt/watch/bin/tl-watch /usr/local/bin/
+RUN apt-get -y update \
+    && apt-get install -y --no-install-recommends python3 python3-distutils \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /opt/watch/bin/tlwatch /usr/local/bin/ \
+    && ln -s /opt/watch/bin/tl-watch /usr/local/bin/
 CMD ["/opt/watch/bin/tl-watch"]
