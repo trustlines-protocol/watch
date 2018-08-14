@@ -34,14 +34,6 @@ tl-watch jsonrpc
 Watches a parity or geth client via the JSONRPC interface. Run
 ``tl-watch jsonrpc --help`` for available command line options.
 
-CHANGES
-=======
-
-0.2.1
------
-
--  The tlwatch executable has been renamed to tl-watch, though it's also
-   still available as tlwatch. It will be removed in a future release.
 
 .. |Build Status| image:: https://travis-ci.org/trustlines-network/watch.svg?branch=develop
    :target: https://travis-ci.org/trustlines-network/watch
