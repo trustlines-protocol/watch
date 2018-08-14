@@ -19,9 +19,10 @@ setup(
     long_description=long_description,
     use_scm_version=True,
     install_requires=["requests", "bernhard", "click"],
+    url="https://github.com/trustlines-network/watch",
     # Author details
     author="Trustlines-Network",
-    author_email="",
+    author_email="contact@brainbot.com",
     license="MIT",
     classifiers=[
         # How mature is this project? Common values are
@@ -35,7 +36,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
     ],
-
     entry_points="""
         [console_scripts]
         tlwatch=tlwatch.cli:cli
