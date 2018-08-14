@@ -9,6 +9,7 @@ branches:
   only:
   - master
   - develop
+  - pypi
   - /^[0-9]+/
 stages:
   - name: testing
@@ -52,3 +53,17 @@ jobs:
         on:
           all_branches: true
           condition: $TRAVIS_BRANCH =~ ^(develop|[0-9]+.*)$
+    - stage: deploying
+      name: pypi
+      install: /bin/true
+      script:
+        - /bin/true
+      deploy:
+        - provider: pypi
+          skip_cleanup: true
+          user: trustlines
+          password:
+            secure: "tL9LXHMNN3SnWAh1GRjBUMb+2oXQVndUyKvH28KD3vAVMD1hjhcNOs+qsmCSpLNFJBSwswXTbe1m/d6hlE2epcsx1mVZvtMvkjrEWkXLfaoZrqddoAF+b9+tpiIbG4XkB5tVF5WJhvzdSTQzvvtoMBouwj9rKalclFnWDHuacNqswClwDZBMH7l4RVj09b6HK9EA5mdDCvI0VzKxcekwa5wsdB4GLD8Y5oIipwkwFdk5/sdFRzzgZZsa3F+kpcDix60xms+5WoUNZfpNPhD/XDN57N73wOUSHcQoqad3QDFqiBARASFwqsNlkdvzmBnPA3A+1J6KhE439zVAXyl9Xww30n1QrLJbjLcGLl1m1WiJrgZyKIFdml9HbQqf1jlBcUKXCeSOqynx61eBHP8QnPZSZ6UOlb2N5btvwBrNtKVg/3+/RnTDoFBi/SPwubdH2JCHmFMhMgVEJUS7san+6PMha4HjcVtZNcKkK8lq+m2vff3+JIguxCPeQE2nfoewoEHULYK+xfe5pVj/sm3Zl64gfooSFmjHyFaEOVF/xLPx0+W26XVycvEaOCDJBPBwYGoXAI+mTl8rdH/dyKPgHzZlMjCQ+uVl6bI1FSb5SSBBm1D/UoT8FrsjTw9aVrg5Ppp3Pqib6tPyJxfbECUyEhyC/yuGoKL93SRhFjpBSR4="
+          on:
+            all_branches: true
+            condition: $TRAVIS_BRANCH =~ ^(develop|pypi|[0-9]+.*)$
