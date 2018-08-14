@@ -2,7 +2,7 @@
 Change Log
 ==========
 
-`0.2.2`_ (2018.08-14)
+`0.2.2`_ (2018-08-14)
 ---------------------
 * trustlines-watch has been released on PyPi
 
