@@ -22,3 +22,5 @@ docs/_build
 .idea
 venv/
 local/
+
+.pytest_cache/
