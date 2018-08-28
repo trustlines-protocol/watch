@@ -39,6 +39,9 @@ def watch_etherscan(chain):
                 "metric": blocknumber,
             }
         ]
+    except KeyboardInterrupt:
+        raise
+
     except BaseException as e:
         logger.warning("error in watch_etherscan:%s", e)
         return [
@@ -56,6 +59,7 @@ def watch_etherscan(chain):
 @click.option("--riemann-port", default=5555, envvar="RIEMANN_PORT")
 @click.option("--chain", default="main", type=click.Choice(name2url.keys()))
 def etherscan(riemann_host, riemann_port, chain):
+    """monitor etherscan for latest blocknumber"""
     logging.basicConfig(level=logging.INFO)
     logger.info("version %s starting", util.get_version())
     logger.info("watching %s at %s", chain, name2url[chain])

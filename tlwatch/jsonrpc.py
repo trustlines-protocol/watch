@@ -62,6 +62,9 @@ def watch_jsonrpc(url):
                 "ttl": 30,
             },
         ]
+    except KeyboardInterrupt:
+        raise
+
     except BaseException as e:
         logger.warning("error in watch_etherscan:%s", e)
         return [
@@ -79,6 +82,7 @@ def watch_jsonrpc(url):
 @click.option("--riemann-port", default=5555, envvar="RIEMANN_PORT")
 @click.option("--url", default="http://localhost:8545")
 def jsonrpc(riemann_host, riemann_port, url):
+    """watch geth/parity for latest block number"""
     logging.basicConfig(level=logging.INFO)
     logger.info("version %s starting", util.get_version())
     logger.info("watching %s", url)
