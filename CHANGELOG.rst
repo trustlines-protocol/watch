@@ -2,6 +2,11 @@
 Change Log
 ==========
 
+`0.2.3`_ (in development)
+------------------------
+* basic monitoring for the relay server has been added (`tl-watch relay`)
+* tl-watch handles CTRL-C
+
 `0.2.2`_ (2018-08-14)
 ---------------------
 * trustlines-watch has been released on PyPi
@@ -13,4 +18,5 @@ Change Log
 
 
 .. _0.2.1: https://github.com/trustlines-network/watch/compare/0.2.0...0.2.1
-.. _0.2.2: https://github.com/trustlines-network/watch/compare/0.2.1...feature/rst
+.. _0.2.2: https://github.com/trustlines-network/watch/compare/0.2.1...0.2.2
+.. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...develop
