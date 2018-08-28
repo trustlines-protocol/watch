@@ -34,6 +34,12 @@ tl-watch jsonrpc
 Watches a parity or geth client via the JSONRPC interface. Run
 ``tl-watch jsonrpc --help`` for available command line options.
 
+tl-watch relay
+~~~~~~~~~~~~~~~~
+
+Watches a trustlines relay server via the REST API. Run ``tl-watch relay
+--help`` for available command line options.
+
 Change log
 ----------
 
