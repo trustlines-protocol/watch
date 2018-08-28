@@ -2,8 +2,8 @@
 Change Log
 ==========
 
-`0.2.3`_ (in development)
-------------------------
+`0.2.3`_ (2018-08-28)
+---------------------
 * basic monitoring for the relay server has been added (`tl-watch relay`)
 * tl-watch handles CTRL-C
 
@@ -19,4 +19,4 @@ Change Log
 
 .. _0.2.1: https://github.com/trustlines-network/watch/compare/0.2.0...0.2.1
 .. _0.2.2: https://github.com/trustlines-network/watch/compare/0.2.1...0.2.2
-.. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...develop
+.. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...0.2.3
