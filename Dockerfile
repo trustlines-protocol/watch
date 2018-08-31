@@ -12,7 +12,7 @@ FROM ubuntu:18.04 as builder
 ENV LANG C.UTF-8
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends python3 python3-distutils \
-               python3-dev python3-venv git build-essential \
+               python3-dev python3-venv git build-essential libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m venv /opt/watch
@@ -38,7 +38,7 @@ ENV LANG C.UTF-8
 COPY --from=builder /opt/watch /opt/watch
 WORKDIR /opt/watch
 RUN apt-get -y update \
-    && apt-get install -y --no-install-recommends python3 python3-distutils \
+    && apt-get install -y --no-install-recommends python3 python3-distutils libpq5 \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /opt/watch/bin/tlwatch /usr/local/bin/ \
     && ln -s /opt/watch/bin/tl-watch /usr/local/bin/

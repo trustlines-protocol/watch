@@ -10,8 +10,13 @@ information to a riemann instance.
 Installation
 ------------
 
-trustlines watch requires python 3.5 or up. Please run the following
-command in a python 3 virtualenv:
+trustlines watch requires python 3.5 or up. It also needs the postgresql development files. On a debian based system these can be installed with
+
+::
+
+   apt install libpq-dev
+
+Please run the following command in a python 3 virtualenv:
 
 ::
 
