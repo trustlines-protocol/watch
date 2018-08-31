@@ -18,7 +18,7 @@ setup(
     description="monitor trustlines cluster with riemann",
     long_description=long_description,
     use_scm_version=True,
-    install_requires=["requests", "bernhard", "click"],
+    install_requires=["requests", "bernhard", "click", "psycopg2>=2.7,<2.8"],
     url="https://github.com/trustlines-network/watch",
     # Author details
     author="Trustlines-Network",

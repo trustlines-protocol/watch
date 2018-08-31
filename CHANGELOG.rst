@@ -2,6 +2,11 @@
 Change Log
 ==========
 
+`0.3.0`_ (2018-08-31)
+---------------------
+* The `tl-watch psql` subcommand has been added. It can be used to monitor
+  results from an SQL query against a postgresql database.
+
 `0.2.3`_ (2018-08-28)
 ---------------------
 * basic monitoring for the relay server has been added (`tl-watch relay`)
@@ -20,3 +25,4 @@ Change Log
 .. _0.2.1: https://github.com/trustlines-network/watch/compare/0.2.0...0.2.1
 .. _0.2.2: https://github.com/trustlines-network/watch/compare/0.2.1...0.2.2
 .. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...0.2.3
+.. _0.3.0: https://github.com/trustlines-network/watch/compare/0.2.3...0.3.0

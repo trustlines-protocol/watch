@@ -40,6 +40,21 @@ tl-watch relay
 Watches a trustlines relay server via the REST API. Run ``tl-watch relay
 --help`` for available command line options.
 
+tl-watch psql
+~~~~~~~~~~~~~~~~
+
+Queries a postgres database. Run ``tl-watch psql --help`` for available command
+line options.
+The sql query to run is given via the command line option ``--sqlquery``. It
+must return at least the ``service`` and ``metric`` fields.
+
+Here's an example that would monitor the synchronization state of ethindex:
+
+::
+
+    tl-watch psql --sqlquery "select 'sync.' || syncid || '.last_block' service, last_block_number metric from sync"
+
+
 Change log
 ----------
 
