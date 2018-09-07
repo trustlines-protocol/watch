@@ -40,7 +40,7 @@ def watch_relay(url):
 @click.command()
 @click.option("--riemann-host", default="localhost", envvar="RIEMANN_HOST")
 @click.option("--riemann-port", default=5555, envvar="RIEMANN_PORT")
-@click.option("--url", default="https://localhost:5000")
+@click.option("--url", default="http://localhost:5000")
 def relay(riemann_host, riemann_port, url):
     """monitor relay server"""
     logging.basicConfig(level=logging.INFO)
