@@ -33,13 +33,15 @@ RUN python -c 'import pkg_resources; print(pkg_resources.get_distribution("trust
 
 
 # copy the contents of the virtualenv from the intermediate container
-FROM ubuntu:18.04
+FROM ubuntu:18.04 as runner
 ENV LANG C.UTF-8
-COPY --from=builder /opt/watch /opt/watch
-WORKDIR /opt/watch
 RUN apt-get -y update \
     && apt-get install -y --no-install-recommends python3 python3-distutils libpq5 \
     && rm -rf /var/lib/apt/lists/* \
     && ln -s /opt/watch/bin/tlwatch /usr/local/bin/ \
     && ln -s /opt/watch/bin/tl-watch /usr/local/bin/
+
+FROM runner
+COPY --from=builder /opt/watch /opt/watch
+WORKDIR /opt/watch
 CMD ["/opt/watch/bin/tl-watch"]
