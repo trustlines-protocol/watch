@@ -30,7 +30,14 @@ def watch_psql(query):
             with conn.cursor() as cur:
                 cur.execute(query)
                 rows = cur.fetchall()
-        return [build_event_from_row(row) for row in rows]
+        return [build_event_from_row(row) for row in rows] + [
+            {
+                "service": "watch.sqlquery.{}".format(query),
+                "host": socket.gethostname(),
+                "state": "ok",
+                "ttl": 30,
+            }
+        ]
     except KeyboardInterrupt:
         raise
 
