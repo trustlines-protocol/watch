@@ -2,6 +2,11 @@
 Change Log
 ==========
 
+`0.3.1`_ (2019-01-03)
+---------------------
+- report success for the watch.sqlquery.{query} service
+- use default HTTP URL for tl-watch relay
+
 `0.3.0`_ (2018-08-31)
 ---------------------
 * The `tl-watch psql` subcommand has been added. It can be used to monitor
@@ -26,3 +31,4 @@ Change Log
 .. _0.2.2: https://github.com/trustlines-network/watch/compare/0.2.1...0.2.2
 .. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...0.2.3
 .. _0.3.0: https://github.com/trustlines-network/watch/compare/0.2.3...0.3.0
+.. _0.3.1: https://github.com/trustlines-network/watch/compare/0.3.0...0.3.1
