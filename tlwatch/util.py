@@ -31,6 +31,6 @@ def watch_report_loop(get_riemann_client, watch, sleep_time):
                 client.send(x)
         except KeyboardInterrupt:
             raise
-        except BaseException as e:
+        except BaseException:
             logger.critical("Error in watch", exc_info=sys.exc_info())
         time.sleep(sleep_time)
