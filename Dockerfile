@@ -18,9 +18,9 @@ RUN apt-get -y update \
 RUN python3 -m venv /opt/watch
 ENV PATH "/opt/watch/bin:${PATH}"
 WORKDIR /watch
-RUN pip install --disable-pip-version-check pip==18.0
 
 COPY ./constraints.txt constraints.txt
+RUN pip install --disable-pip-version-check -c constraints.txt pip wheel setuptools
 COPY ./requirements.txt requirements.txt
 # remove development dependencies from the end of the file
 RUN sed -i -e '/development dependencies/q' requirements.txt
