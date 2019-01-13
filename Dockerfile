@@ -44,4 +44,4 @@ RUN apt-get -y update \
 FROM runner
 COPY --from=builder /opt/watch /opt/watch
 WORKDIR /opt/watch
-CMD ["/opt/watch/bin/tl-watch"]
+ENTRYPOINT ["/opt/watch/bin/tl-watch"]
