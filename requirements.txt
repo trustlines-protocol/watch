@@ -6,7 +6,6 @@ psycopg2>=2.7,<2.8 --no-binary psycopg2
 black
 coverage
 flake8
-flake8-invalid-escape-sequences
 flake8-string-format
 mypy
 pytest
