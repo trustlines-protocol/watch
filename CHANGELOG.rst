@@ -2,6 +2,15 @@
 Change Log
 ==========
 
+`0.4.0`_ (2019-01-14)
+---------------------
+- The obsolete `tlwatch` executable has been removed. Please use `tl-watch`
+  instead.
+- `tl-watch --version` will now print the current version of tl-watch
+- `tl-watch` has been set as entrypoint in the docker executable. Beware, this
+  is a breaking change.
+
+
 `0.3.1`_ (2019-01-03)
 ---------------------
 - report success for the watch.sqlquery.{query} service
@@ -32,3 +41,4 @@ Change Log
 .. _0.2.3: https://github.com/trustlines-network/watch/compare/0.2.2...0.2.3
 .. _0.3.0: https://github.com/trustlines-network/watch/compare/0.2.3...0.3.0
 .. _0.3.1: https://github.com/trustlines-network/watch/compare/0.3.0...0.3.1
+.. _0.4.0: https://github.com/trustlines-network/watch/compare/0.3.1...0.4.0
