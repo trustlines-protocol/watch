@@ -20,7 +20,7 @@ name2url = {
 def eth_blockNumber(chain: str):
     urlparams = {"module": "proxy", "action": "eth_blockNumber"}
     url = name2url[chain] + "?" + urllib.parse.urlencode(urlparams)
-    response = requests.get(url).json().get("result")
+    response = requests.get(url, timeout=10.0).json().get("result")
     blockNumber = util.decode_hex_encoded_number(response)
     logger.info("GET %s => %s %s", url, response, blockNumber)
 
