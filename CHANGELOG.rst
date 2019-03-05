@@ -1,6 +1,10 @@
 ==========
 Change Log
 ==========
+`0.5.0`_ (2019-03-05)
+---------------------
+- use a timeout for etherscan requests
+- transfer copyright to trustlines foundation
 
 `0.4.0`_ (2019-01-14)
 ---------------------
@@ -42,3 +46,4 @@ Change Log
 .. _0.3.0: https://github.com/trustlines-network/watch/compare/0.2.3...0.3.0
 .. _0.3.1: https://github.com/trustlines-network/watch/compare/0.3.0...0.3.1
 .. _0.4.0: https://github.com/trustlines-network/watch/compare/0.3.1...0.4.0
+.. _0.5.0: https://github.com/trustlines-network/watch/compare/0.4.0...0.5.0
