@@ -19,7 +19,7 @@ setup(
     long_description=long_description,
     use_scm_version=True,
     install_requires=["requests", "bernhard", "click", "psycopg2>=2.7,<2.8"],
-    url="https://github.com/trustlines-network/watch",
+    url="https://github.com/trustlines-protocol/watch",
     # Author details
     author="Trustlines-Network",
     author_email="contact@brainbot.com",
