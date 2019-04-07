@@ -63,7 +63,7 @@ Here's an example that would monitor the synchronization state of ethindex:
 Change log
 ----------
 
-See `CHANGELOG <https://github.com/trustlines-protocol/watch/blob/develop/CHANGELOG.rst>`_.
+See `CHANGELOG <https://github.com/trustlines-protocol/watch/blob/master/CHANGELOG.rst>`_.
 
 
 .. |Build Status| image:: https://circleci.com/gh/trustlines-protocol/watch.svg?style=svg
