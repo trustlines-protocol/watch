@@ -65,8 +65,7 @@ Change log
 
 See `CHANGELOG <https://github.com/trustlines-protocol/watch/blob/master/CHANGELOG.rst>`_.
 
-
-.. |Build Status| image:: https://circleci.com/gh/trustlines-protocol/watch.svg?style=svg
-    :target: https://circleci.com/gh/trustlines-protocol/watch
+.. |Build Status| image:: https://circleci.com/gh/trustlines-protocol/watch/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/trustlines-protocol/watch/tree/master
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/ambv/black
