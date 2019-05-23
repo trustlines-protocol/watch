@@ -58,7 +58,7 @@ def watch_jsonrpc(url):
             {
                 "service": "jsonrpc.syncing",
                 "host": url,
-                "state": "true" if syncing else "false",
+                "state": "syncing" if syncing else "ok",
                 "ttl": 30,
             },
         ]
