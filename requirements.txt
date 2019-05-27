@@ -1,7 +1,7 @@
 requests
 bernhard
 click
-psycopg2>=2.7,<2.8 --no-binary psycopg2
+psycopg2
 # --- development dependencies, i.e. dependencies not needed for running watch
 black
 coverage
