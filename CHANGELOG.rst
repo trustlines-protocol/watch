@@ -1,6 +1,10 @@
 ==========
 Change Log
 ==========
+`0.5.1`_ (2019-06-24)
+---------------------
+- install signal handlers in order to handle signal from docker
+- report syncing state as 'ok' or 'syncing'
 `0.5.0`_ (2019-03-05)
 ---------------------
 - use a timeout for etherscan requests
@@ -47,3 +51,4 @@ Change Log
 .. _0.3.1: https://github.com/trustlines-protocol/watch/compare/0.3.0...0.3.1
 .. _0.4.0: https://github.com/trustlines-protocol/watch/compare/0.3.1...0.4.0
 .. _0.5.0: https://github.com/trustlines-protocol/watch/compare/0.4.0...0.5.0
+.. _0.5.1: https://github.com/trustlines-protocol/watch/compare/0.5.0...0.5.1
