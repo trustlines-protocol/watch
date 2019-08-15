@@ -1,7 +1,6 @@
 import functools
 import logging
-import re
-from hashlib import md5
+from hashlib import sha256
 from urllib import parse
 
 import bernhard
@@ -17,12 +16,11 @@ logger = logging.getLogger(__name__)
 def calculate_website_source_hash(url: str) -> str:
     """Fetch sources of the website and calculate hash.
 
-    Relevant sources are the HTML page and the JavaScript files. For the
-    latter ones, only the first party scripts are of interest, which are
-    stored at the `/js` directory. The hash is calculated over the
-    concatenation of all relevant sources. Be aware that this depends on
-    the order of the script imports. This is considered to be fine,
-    since reorder them would also change the HTML source.
+    Relevant sources are the HTML page and the JavaScript files. The
+    hash is calculated over the concatenation of all relevant sources.
+    Be aware that this depends on the order of the script imports. This
+    is considered to be fine, since reorder them would also change the
+    HTML source.
     """
 
     source_list = []
@@ -30,22 +28,41 @@ def calculate_website_source_hash(url: str) -> str:
     source_list.append(html)
     soup = BeautifulSoup(html, features="html.parser")
     script_url_list = [
-        parse.urljoin(url, script.get("src"))
-        for script in soup.findAll("script", attrs={"src": re.compile("^/js")})
+        parse.urljoin(url, script.get("src")) for script in soup.findAll("script")
     ]
 
     for script_url in script_url_list:
         script = requests.get(script_url).text
-        source_list.append(script)
+        source_list.append(f"{len(script)}{script}")
 
-    source_hash = md5("".join(source_list).encode())
+    source_hash = sha256("".join(source_list).encode())
     return source_hash.hexdigest()
 
 
 def watch_auction_website(url: str, original_hash: str):
-    current_hash = calculate_website_source_hash(url)
-    state = "ok" if current_hash == original_hash else "error"
-    return [{"service": "auction-website.source-hash", "state": state, "ttl": 30}]
+    host = parse.urlparse(url).netloc
+    description = ""
+
+    try:
+        current_hash = calculate_website_source_hash(url)
+        state = "ok" if current_hash == original_hash else "error"
+
+    except KeyboardInterrupt:
+        raise
+
+    except BaseException as e:
+        state = "io-error"
+        description = str(e)
+
+    return [
+        {
+            "service": url,
+            "host": host,
+            "state": state,
+            "description": description,
+            "ttl": 30,
+        }
+    ]
 
 
 @click.command()
