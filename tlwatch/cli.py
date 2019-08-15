@@ -1,12 +1,14 @@
 import os
 import signal
+
 import click
 import pkg_resources
+
 import tlwatch.etherscan
 import tlwatch.jsonrpc
-import tlwatch.relay
 import tlwatch.psql
-import tlwatch.auction_website
+import tlwatch.relay
+import tlwatch.website
 
 
 def report_version():
@@ -37,5 +39,5 @@ cli.add_command(tlwatch.etherscan.etherscan)
 cli.add_command(tlwatch.jsonrpc.jsonrpc)
 cli.add_command(tlwatch.relay.relay)
 cli.add_command(tlwatch.psql.psql)
-cli.add_command(tlwatch.auction_website.auction_website)
-cli.add_command(tlwatch.auction_website.get_website_hash)
+cli.add_command(tlwatch.website.website)
+cli.add_command(tlwatch.website.get_website_hash)

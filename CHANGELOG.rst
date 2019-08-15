@@ -4,8 +4,8 @@ Change Log
 
 `0.5.2`_ (2019-08-15)
 ---------------------
-- The `tl-watch auction-website` subcommand has been added. It can be used to
-  monitor the changed sources of a website.
+- The `tl-watch website` subcommand has been added. It can be used to monitor
+  the code changes on a website.
 - The `tl-watch get-website-hash` subcommand has been added. It can be used to
   calculate the initial origin hash of a website.
 

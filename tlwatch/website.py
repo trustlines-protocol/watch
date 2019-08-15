@@ -39,7 +39,7 @@ def calculate_website_source_hash(url: str) -> str:
     return source_hash.hexdigest()
 
 
-def watch_auction_website(url: str, original_hash: str):
+def watch_website(url: str, original_hash: str):
     host = parse.urlparse(url).netloc
     description = ""
 
@@ -77,14 +77,14 @@ def get_website_hash(url: str):
 @click.option("--riemann-port", default=5555, envvar="RIEMANN_PORT")
 @click.option("--url")
 @click.option("--original-hash")
-def auction_website(riemann_host, riemann_port, url, original_hash):
-    """Monitor auction website for changed sources."""
+def website(riemann_host, riemann_port, url, original_hash):
+    """Monitor website for changed sources."""
     logging.basicConfig(level=logging.INFO)
     logger.info(f"version {util.get_version()} starting")
     logger.info(f"watching {url} sources with original hash {original_hash}")
 
     util.watch_report_loop(
         lambda: bernhard.Client(riemann_host, riemann_port),
-        functools.partial(watch_auction_website, url, original_hash),
+        functools.partial(watch_website, url, original_hash),
         10,
     )
