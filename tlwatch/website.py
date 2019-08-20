@@ -1,16 +1,28 @@
 import functools
 import logging
+import socket
 from hashlib import sha256
 from urllib import parse
 
-import bernhard
 import click
 import requests
-from bs4 import BeautifulSoup
 
+import bernhard
+from bs4 import BeautifulSoup
 from tlwatch import util
 
 logger = logging.getLogger(__name__)
+
+url_option = click.option(
+    "--url", help="The URL of the website", type=str, required=True
+)
+
+
+def get_url_source_as_text(url: str) -> str:
+    logger.info(f"Fetch '{url}'")
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.text
 
 
 def calculate_website_source_hash(url: str) -> str:
@@ -23,8 +35,9 @@ def calculate_website_source_hash(url: str) -> str:
     HTML source.
     """
 
+    logger.info("Calculate website source hash...")
     source_list = []
-    html = requests.get(url).text
+    html = get_url_source_as_text(url)
     source_list.append(html)
     soup = BeautifulSoup(html, features="html.parser")
     script_url_list = [
@@ -32,7 +45,7 @@ def calculate_website_source_hash(url: str) -> str:
     ]
 
     for script_url in script_url_list:
-        script = requests.get(script_url).text
+        script = get_url_source_as_text(script_url)
         source_list.append(f"{len(script)}{script}")
 
     source_hash = sha256("".join(source_list).encode())
@@ -40,7 +53,8 @@ def calculate_website_source_hash(url: str) -> str:
 
 
 def watch_website(url: str, original_hash: str):
-    host = parse.urlparse(url).netloc
+    url_parsed = parse.urlparse(url)
+    url_without_credentials = url_parsed._replace(netloc=url_parsed.hostname).geturl()
     description = ""
 
     try:
@@ -56,8 +70,8 @@ def watch_website(url: str, original_hash: str):
 
     return [
         {
-            "service": url,
-            "host": host,
+            "service": url_without_credentials,
+            "host": socket.gethostname(),
             "state": state,
             "description": description,
             "ttl": 30,
@@ -66,17 +80,17 @@ def watch_website(url: str, original_hash: str):
 
 
 @click.command()
-@click.option("--url", type=str)
+@url_option
 def get_website_hash(url: str):
     source_hash = calculate_website_source_hash(url)
     click.echo(source_hash)
 
 
 @click.command()
+@url_option
 @click.option("--riemann-host", default="localhost", envvar="RIEMANN_HOST")
 @click.option("--riemann-port", default=5555, envvar="RIEMANN_PORT")
-@click.option("--url")
-@click.option("--original-hash")
+@click.option("--original-hash", required=True)
 def website(riemann_host, riemann_port, url, original_hash):
     """Monitor website for changed sources."""
     logging.basicConfig(level=logging.INFO)
