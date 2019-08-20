@@ -59,14 +59,20 @@ def watch_website(url: str, original_hash: str):
 
     try:
         current_hash = calculate_website_source_hash(url)
-        state = "ok" if current_hash == original_hash else "error"
-
+        if current_hash == original_hash:
+            state = "ok"
+            description = f"hash of {url} matches expected hash {original_hash}"
+        else:
+            state = "error"
+            description = f"current hash {current_hash} of {url} does not match expected hash {original_hash}"
     except KeyboardInterrupt:
         raise
 
-    except BaseException as e:
+    except BaseException as exc:
         state = "io-error"
-        description = str(e)
+        description = (
+            f"An error occured while trying to compute the checksum for {url}: {exc}"
+        )
 
     return [
         {
