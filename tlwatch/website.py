@@ -82,6 +82,7 @@ def watch_website(url: str, original_hash: str):
 @click.command()
 @url_option
 def get_website_hash(url: str):
+    logging.basicConfig(level=logging.INFO)
     source_hash = calculate_website_source_hash(url)
     click.echo(source_hash)
 
