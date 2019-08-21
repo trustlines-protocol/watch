@@ -20,7 +20,7 @@ url_option = click.option(
 
 def get_url_source_as_text(url: str) -> str:
     logger.info(f"Fetch '{url}'")
-    response = requests.get(url)
+    response = requests.get(url, timeout=10.0)
     response.raise_for_status()
     return response.text
 
@@ -35,10 +35,16 @@ def calculate_website_source_hash(url: str) -> str:
     HTML source.
     """
 
-    logger.info("Calculate website source hash...")
-    source_list = []
+    logger.info("Calculate website source hash for '%s'", url)
+    source_hash = sha256()
+
+    def add_source(src):
+        d = src.encode()
+        source_hash.update(f"{len(d)}\n".encode())
+        source_hash.update(d)
+
     html = get_url_source_as_text(url)
-    source_list.append(html)
+    add_source(html)
     soup = BeautifulSoup(html, features="html.parser")
     script_url_list = [
         parse.urljoin(url, script.get("src")) for script in soup.findAll("script")
@@ -46,9 +52,8 @@ def calculate_website_source_hash(url: str) -> str:
 
     for script_url in script_url_list:
         script = get_url_source_as_text(script_url)
-        source_list.append(f"{len(script)}{script}")
+        add_source(script)
 
-    source_hash = sha256("".join(source_list).encode())
     return source_hash.hexdigest()
 
 
@@ -74,13 +79,14 @@ def watch_website(url: str, original_hash: str):
             f"An error occured while trying to compute the checksum for {url}: {exc}"
         )
 
+    logger.info(f"report to riemann: {state}, {description}")
     return [
         {
             "service": url_without_credentials,
             "host": socket.gethostname(),
             "state": state,
             "description": description,
-            "ttl": 30,
+            "ttl": 3 * 120 + 20,
         }
     ]
 
@@ -107,5 +113,5 @@ def website(riemann_host, riemann_port, url, original_hash):
     util.watch_report_loop(
         lambda: bernhard.Client(riemann_host, riemann_port),
         functools.partial(watch_website, url, original_hash),
-        10,
+        120,
     )

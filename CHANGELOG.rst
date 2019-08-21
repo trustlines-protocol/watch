@@ -2,7 +2,13 @@
 Change Log
 ==========
 
-`0.5.2`_ (2019-08-15)
+`0.5.3`_ (2019-08-21)
+---------------------
+- Use a timeout when fetching URLs
+- Fetch the website less often
+- Make the hash computation unambiguous
+
+`0.5.2`_ (2019-08-20)
 ---------------------
 - The `tl-watch website` subcommand has been added. It can be used to monitor
   the code changes on a website.
@@ -62,3 +68,4 @@ Change Log
 .. _0.5.0: https://github.com/trustlines-protocol/watch/compare/0.4.0...0.5.0
 .. _0.5.1: https://github.com/trustlines-protocol/watch/compare/0.5.0...0.5.1
 .. _0.5.2: https://github.com/trustlines-protocol/watch/compare/0.5.1...0.5.2
+.. _0.5.3: https://github.com/trustlines-protocol/watch/compare/0.5.2...0.5.3
