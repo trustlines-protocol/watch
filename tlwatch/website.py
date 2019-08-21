@@ -79,13 +79,14 @@ def watch_website(url: str, original_hash: str):
             f"An error occured while trying to compute the checksum for {url}: {exc}"
         )
 
+    logger.info(f"report to riemann: {state}, {description}")
     return [
         {
             "service": url_without_credentials,
             "host": socket.gethostname(),
             "state": state,
             "description": description,
-            "ttl": 30,
+            "ttl": 3 * 120 + 20,
         }
     ]
 
@@ -112,5 +113,5 @@ def website(riemann_host, riemann_port, url, original_hash):
     util.watch_report_loop(
         lambda: bernhard.Client(riemann_host, riemann_port),
         functools.partial(watch_website, url, original_hash),
-        10,
+        120,
     )
