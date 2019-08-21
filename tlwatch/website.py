@@ -20,7 +20,7 @@ url_option = click.option(
 
 def get_url_source_as_text(url: str) -> str:
     logger.info(f"Fetch '{url}'")
-    response = requests.get(url)
+    response = requests.get(url, timeout=10.0)
     response.raise_for_status()
     return response.text
 
