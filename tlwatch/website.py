@@ -35,10 +35,16 @@ def calculate_website_source_hash(url: str) -> str:
     HTML source.
     """
 
-    logger.info("Calculate website source hash...")
-    source_list = []
+    logger.info("Calculate website source hash for '%s'", url)
+    source_hash = sha256()
+
+    def add_source(src):
+        d = src.encode()
+        source_hash.update(f"{len(d)}\n".encode())
+        source_hash.update(d)
+
     html = get_url_source_as_text(url)
-    source_list.append(html)
+    add_source(html)
     soup = BeautifulSoup(html, features="html.parser")
     script_url_list = [
         parse.urljoin(url, script.get("src")) for script in soup.findAll("script")
@@ -46,9 +52,8 @@ def calculate_website_source_hash(url: str) -> str:
 
     for script_url in script_url_list:
         script = get_url_source_as_text(script_url)
-        source_list.append(f"{len(script)}{script}")
+        add_source(script)
 
-    source_hash = sha256("".join(source_list).encode())
     return source_hash.hexdigest()
 
 
