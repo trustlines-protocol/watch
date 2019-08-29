@@ -28,10 +28,13 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
         netloc=base_url_parsed.hostname
     ).geturl()
 
+    metric = ""
+    description = ""
+
     try:
         block_number = get_latest_block_number(base_url)
         state = "ok"
-        description = f"Retrieved block number: {block_number}"
+        metric = block_number
 
     except KeyboardInterrupt:
         raise
@@ -50,6 +53,7 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
             "service": base_url_without_credentials,
             "host": socket.gethostname(),
             "state": state,
+            "metric": metric,
             "description": description,
             "ttl": 30,
         }
