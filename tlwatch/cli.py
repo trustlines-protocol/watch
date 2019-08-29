@@ -4,6 +4,7 @@ import signal
 import click
 import pkg_resources
 
+import tlwatch.auction_backend
 import tlwatch.etherscan
 import tlwatch.jsonrpc
 import tlwatch.psql
@@ -41,3 +42,4 @@ cli.add_command(tlwatch.relay.relay)
 cli.add_command(tlwatch.psql.psql)
 cli.add_command(tlwatch.website.website)
 cli.add_command(tlwatch.website.get_website_hash)
+cli.add_command(tlwatch.auction_backend.auction_backend)
