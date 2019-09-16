@@ -6,7 +6,7 @@ DIR=$(dirname $(realpath ${BASH_SOURCE[0]}))
 set -u
 set -x
 
-cd $DIR
+cd "$DIR"
 
 function remove_volume() {
     docker volume rm trustlines-deb-opt >/dev/null 2>&1
@@ -27,4 +27,4 @@ docker run --rm -v$(pwd):/debian -vtrustlines-deb-opt:/opt trustlines/builder \
          -d libpq5 \
          /opt/watch'
 
-realpath *.deb
+realpath ./*.deb

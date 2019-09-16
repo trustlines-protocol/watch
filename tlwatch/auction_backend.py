@@ -19,6 +19,8 @@ def get_latest_block_number(base_url: str) -> int:
     response = requests.get(f"{base_url}/latest-block", timeout=10.0)
     response.raise_for_status()
     latest_block_number = response.json().get("blockNumber")
+    if not isinstance(latest_block_number, int):
+        raise ValueError("got bad response from /latest-block endpoint")
     return latest_block_number
 
 
@@ -28,7 +30,7 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
         netloc=base_url_parsed.hostname
     ).geturl()
 
-    metric = ""
+    metric = -1
     description = ""
 
     try:
@@ -46,7 +48,7 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
             f"block number from '{base_url_without_credentials}': {exc}"
         )
 
-    logger.info(f"Report to Riemann: {state}, {description}")
+    logger.info(f"Report to Riemann: {state}, {metric} {description}")
 
     return [
         {
