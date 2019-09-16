@@ -48,7 +48,7 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
             f"block number from '{base_url_without_credentials}': {exc}"
         )
 
-    logger.info(f"Report to Riemann: {state}, {description}")
+    logger.info(f"Report to Riemann: {state}, {metric} {description}")
 
     return [
         {
