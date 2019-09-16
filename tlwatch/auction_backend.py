@@ -19,6 +19,8 @@ def get_latest_block_number(base_url: str) -> int:
     response = requests.get(f"{base_url}/latest-block", timeout=10.0)
     response.raise_for_status()
     latest_block_number = response.json().get("blockNumber")
+    if not isinstance(latest_block_number, int):
+        raise ValueError("got bad response from /latest-block endpoint")
     return latest_block_number
 
 
