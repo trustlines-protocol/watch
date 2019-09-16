@@ -2,6 +2,10 @@
 Change Log
 ==========
 
+`0.5.4`_ (2019-09-16)
+---------------------
+ Add monitor module for auction backend
+
 `0.5.3`_ (2019-08-21)
 ---------------------
 - Use a timeout when fetching URLs
@@ -69,3 +73,4 @@ Change Log
 .. _0.5.1: https://github.com/trustlines-protocol/watch/compare/0.5.0...0.5.1
 .. _0.5.2: https://github.com/trustlines-protocol/watch/compare/0.5.1...0.5.2
 .. _0.5.3: https://github.com/trustlines-protocol/watch/compare/0.5.2...0.5.3
+.. _0.5.4: https://github.com/trustlines-protocol/watch/compare/0.5.3...0.5.4
