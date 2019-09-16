@@ -28,7 +28,7 @@ def watch_auction_backend(base_url: str) -> List[Dict]:
         netloc=base_url_parsed.hostname
     ).geturl()
 
-    metric = ""
+    metric = -1
     description = ""
 
     try:
