@@ -2,9 +2,13 @@
 Change Log
 ==========
 
+`0.5.5`_ (2019-11-19)
+---------------------
+- Add --event-host-dwim flag to jsonrpc command
+
 `0.5.4`_ (2019-09-16)
 ---------------------
- Add monitor module for auction backend
+- Add monitor module for auction backend
 
 `0.5.3`_ (2019-08-21)
 ---------------------
@@ -74,3 +78,4 @@ Change Log
 .. _0.5.2: https://github.com/trustlines-protocol/watch/compare/0.5.1...0.5.2
 .. _0.5.3: https://github.com/trustlines-protocol/watch/compare/0.5.2...0.5.3
 .. _0.5.4: https://github.com/trustlines-protocol/watch/compare/0.5.3...0.5.4
+.. _0.5.5: https://github.com/trustlines-protocol/watch/compare/0.5.4...0.5.5
