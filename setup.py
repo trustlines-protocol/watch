@@ -14,6 +14,7 @@ with open(path.join(here, "README.rst"), encoding="utf-8") as f:
 setup(
     name="trustlines-watch",
     packages=["tlwatch"],
+    package_dir={"": "src"},
     setup_requires=["setuptools_scm"],
     description="monitor trustlines cluster with riemann",
     long_description=long_description,

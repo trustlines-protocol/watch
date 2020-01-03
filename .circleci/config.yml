@@ -94,7 +94,7 @@ jobs:
       - run:
           name: Run flake8
           command: |
-            flake8 setup.py tlwatch
+            flake8 setup.py src
 
   run-black:
     executor: ubuntu-builder
@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Run black
           command: |
-            black --check setup.py tlwatch
+            black --check setup.py src
 
   build-docker-image:
     executor: ubuntu-builder
