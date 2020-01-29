@@ -10,7 +10,7 @@ information to a riemann instance.
 Installation
 ------------
 
-trustlines watch requires python 3.5 or up. It also needs the postgresql development files. On a debian based system these can be installed with
+trustlines watch requires python 3.6 or up. It also needs the postgresql development files. On a debian based system these can be installed with
 
 ::
 
@@ -89,4 +89,4 @@ See `CHANGELOG <https://github.com/trustlines-protocol/watch/blob/master/CHANGEL
 .. |Build Status| image:: https://circleci.com/gh/trustlines-protocol/watch/tree/master.svg?style=svg
     :target: https://circleci.com/gh/trustlines-protocol/watch/tree/master
 .. |Code style: black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-   :target: https://github.com/ambv/black
+   :target: https://github.com/psf/black
