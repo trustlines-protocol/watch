@@ -11,12 +11,12 @@ logger = logging.getLogger(__name__)
 
 def watch_relay(url):
     host = urllib.parse.urlparse(url).netloc
-    networks_url = urllib.parse.urljoin(url, "/api/v1/networks")
+    version_url = urllib.parse.urljoin(url, "/api/v1/version")
     description = ""
     try:
-        if len(requests.get(networks_url, timeout=10).json()) == 0:
+        if "relay/v" not in requests.get(version_url, timeout=10).text:
             state = "error"
-            description = "no networks"
+            description = "Version endpoint returns no version."
         else:
             state = "ok"
     except KeyboardInterrupt:
