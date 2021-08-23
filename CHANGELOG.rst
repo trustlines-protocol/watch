@@ -2,6 +2,10 @@
 Change Log
 ==========
 
+`0.5.6`_ (2021-08-23)
+---------------------
+- Change relay checked endpoint from /networks to /version
+
 `0.5.5`_ (2019-11-19)
 ---------------------
 - Add --event-host-dwim flag to jsonrpc command
@@ -79,3 +83,4 @@ Change Log
 .. _0.5.3: https://github.com/trustlines-protocol/watch/compare/0.5.2...0.5.3
 .. _0.5.4: https://github.com/trustlines-protocol/watch/compare/0.5.3...0.5.4
 .. _0.5.5: https://github.com/trustlines-protocol/watch/compare/0.5.4...0.5.5
+.. _0.5.6: https://github.com/trustlines-protocol/watch/compare/0.5.5...0.5.6
